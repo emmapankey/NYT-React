@@ -24,10 +24,7 @@ const Navbar = props =>
         <li
           className={window.location.pathname === "/saved" ? "active" : ""}
         >
-          <Link to="/discover">Saved Articles</Link>
-        </li>
-        <li className={window.location.pathname === "/search" ? "active" : ""}>
-          <Link to="/search">Search</Link>
+          <Link to="/saved">Saved Articles</Link>
         </li>
       </ul>
     </div>
