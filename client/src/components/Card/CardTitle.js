@@ -1,6 +1,7 @@
 import React from "react";
+import "./Card.css";
 
 export const CardTitle = props =>
-<span className="card-title">
+<h1 className="card-title">
   {props.children}
-</span>;
+</h1>;
