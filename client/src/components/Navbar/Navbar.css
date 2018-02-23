@@ -1,0 +1,13 @@
+nav.navbar.navbar-default {
+    margin-bottom: 0;
+  }
+
+.navbar-header > .navbar-brand > .active,
+.navbar-header > .navbar-brand > .active:hover,
+.navbar-header > .navbar-brand > .active:focus {
+ background: none;
+}
+
+.navbar-header > .navbar-brand {
+    color: red;
+}
