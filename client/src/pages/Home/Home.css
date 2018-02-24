@@ -1,0 +1,9 @@
+.subTitle {
+    font-weight: 100;
+}
+
+.noResults {
+    font-weight: 600;
+    padding-top: 60px;
+    padding-bottom: 90px;
+}

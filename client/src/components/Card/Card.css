@@ -1,6 +1,9 @@
 .card-title {
     text-align: center;
+    border-bottom: 2px solid white;
+    font-weight: 300;
     padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .card-content {

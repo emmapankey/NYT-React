@@ -6,7 +6,7 @@ import "./Navbar.css";
 const Navbar = props =>
   <nav className="teal lighten-2">
     <div className="nav-wrapper">
-        <Link className="navbar-brand" to="/">
+        <Link className="brand-logo" to="/">
           React-NYT
         </Link>
       <ul className="right hide-on-med-and-down">

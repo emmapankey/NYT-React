@@ -10,7 +10,6 @@ const App = () =>
   <Router>
     <div>
       <Navbar />
-      <p>This is the App component</p>
       <Route exact path="/" component={Home} />
       <Route exact path="/Home" component={Home} />
       <Route exact path="/Saved" component={Saved} />
