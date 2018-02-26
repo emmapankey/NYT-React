@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Row, Container, Col } from "../../components/Grid";
 import { Card, CardTitle } from "../../components/Card";
 import { Input } from "../../components/Form";
@@ -12,7 +12,6 @@ import "./Home.css";
 class Articles extends Component {
   state = {
     articles: [],
-    savedArticles: [],
     topic: "",
     beginYear: "",
     endYear: ""
@@ -29,23 +28,6 @@ class Articles extends Component {
       title: event
     })
       .then(res => this.loadSavedArticles())
-      .catch(err => console.log(err));
-  };
-
-  // Loads the saved articles
-  loadSavedArticles() {
-    API.getSavedArticles()
-      .then(res =>
-        this.setState({ savedArticles: res.data, title: "", date: "" })
-      )
-      .catch(err => console.log(err));
-  };
-
-  // Deletes an article from the database with a given id, then reloads articles from the db
-  delArticle(id) {
-    console.log("del article");
-    API.deleteArticle(id)
-      .then(res => this.loadStories())
       .catch(err => console.log(err));
   };
 
@@ -103,50 +85,43 @@ class Articles extends Component {
               </Card>
               <form>
                 <Input
-                  id="searchTopic"
                   type="text"
-                  name="searchTopic"
+                  name="topic"
                   placeholder="Topic"
                   value={this.state.topic}
                   onChange={this.handleInputChange}
                 />
                 <Input
-                  id="searchStartDate"
                   type="text"
-                  name="searchStartDate"
+                  name="beginYear"
                   placeholder="Start Year"
                   value={this.state.beginYear}
                   onChange={this.handleInputChange}
                 />
                 <Input
-                  id="searchEndDate"
                   type="text"
-                  name="searchEndDate"
+                  name="endYear"
                   placeholder="End Year"
                   value={this.state.endYear}
                   onChange={this.handleInputChange}
                 />
-                <SubmitBtn onClick={this.handleFormSubmit}>
-                  Search
-                </SubmitBtn>
+                <SubmitBtn onClick={this.handleFormSubmit} />
               </form>
             </Col>
             <Col>
               <Card>
                 <CardTitle>
-                  Results
+                  Search Results
             </CardTitle>
                 {this.state.articles.length ? (
                   <Collection>
                     {this.state.articles.map(article => (
-                      <CollectionItem key={article._id}>
-                        <Link to={article.url}>
-                          {article.title}
-                        </Link>
+                      <CollectionItem key={article.headline.main}>
+                       {article.headline.main}
+                       <SaveBtn onClick={() =>
+                         this.saveArticle(article.headline.main)} />
                       </CollectionItem>
                     ))}
-                    <SaveBtn>
-                    </SaveBtn>
                   </Collection>
                 ) : (
                     <h2 className="noResults red-text text-lighten-1">No Results to Display</h2>

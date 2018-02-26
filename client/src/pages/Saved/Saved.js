@@ -1,18 +1,35 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Row, Container, Col } from "../../components/Grid";
 import { Card, CardTitle } from "../../components/Card";
 import { Collection, CollectionItem } from "../../components/Collection";
 import { DeleteBtn } from "../../components/Buttons";
-// import API from "../../utils/API";
+import API from "../../utils/API";
 import "./Saved.css";
 
 
 class Saved extends Component {
   state = {
-    articles: [],
+    savedArticles: [],
     title: "",
-    words: ""
+    date: ""
+  };
+
+  // Loads the saved articles
+  loadSavedArticles() {
+    API.getSavedArticles()
+      .then(res =>
+        this.setState({ savedArticles: res.data, title: "", date: "" })
+      )
+      .catch(err => console.log(err));
+  };
+
+  // Deletes an article from the database with a given id, then reloads articles from the db
+  delArticle(id) {
+    console.log("del article");
+    API.deleteArticle(id)
+      .then(res => this.loadStories())
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -40,11 +57,10 @@ class Saved extends Component {
                 <Collection>
                   {this.state.articles.map(article => (
                     <CollectionItem key={article._id}>
-                      <Link to={article.url}>
-                        {article.title}
-                      </Link>
-                      <DeleteBtn>
-                        </DeleteBtn>
+                      {article.title}
+                      <p>Saved on {article.date}</p>
+                      <DeleteBtn onClick={() =>
+                        this.deleteArticle(article._id)} />
                     </CollectionItem>
                   ))}
                 </Collection>
