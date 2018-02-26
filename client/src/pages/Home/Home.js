@@ -90,13 +90,13 @@ class Articles extends Component {
                 id="searchStartDate"
                 type="text"
                 name="searchStartDate"
-                placeholder="Start Date"
+                placeholder="Start Year"
               />
               <Input
                 id="searchEndDate"
                 type="text"
                 name="searchEndDate"
-                placeholder="End Date"
+                placeholder="End Year"
               />
             </form>
           </Col>

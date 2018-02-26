@@ -1,11 +1,8 @@
 // Require Mongoose
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-// Require db connection
-var db = require("../config/connection");
-
-// Createe article schema
-var articleSchema = mongoose.Schema({
+// Create article schema
+const articleSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     title: {
         type: String,
@@ -14,7 +11,7 @@ var articleSchema = mongoose.Schema({
     },
     date: {
         type: Date,
-        required: true,
+        default: Date.now
     },
     url: {
         type: String,
@@ -29,7 +26,7 @@ var articleSchema = mongoose.Schema({
 });
 
 // Create Article model with the articleSchema
-var Article = mongoose.model("Article", articleSchema);
+var Articles = mongoose.model("Article", articleSchema);
 
 // Export the Scraped model
-module.exports = Article;
+module.exports = Articles;
