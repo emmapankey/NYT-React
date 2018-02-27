@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
 import { Row, Container, Col } from "../../components/Grid";
 import { Card, CardTitle } from "../../components/Card";
 import { Input } from "../../components/Form";
@@ -20,16 +19,6 @@ class Articles extends Component {
   // componentDidMount() {
   //   this.loadArticles();
   // }
-
-  // Saves an article
-  saveArticle = event => {
-    console.log("save article: " + event)
-    API.saveArticle({
-      title: event
-    })
-      .then(res => this.loadSavedArticles())
-      .catch(err => console.log(err));
-  };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -60,6 +49,24 @@ class Articles extends Component {
 
   };
 
+  loadArticles = () => {
+    API.getBooks()
+      .then(res =>
+        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+      )
+      .catch(err => console.log(err));
+  };
+
+  // Saves an article
+  saveArticle = event => {
+    console.log("save article: " + event)
+    API.saveArticle({
+      title: event
+    })
+      .then(res => this.loadSavedArticles())
+      .catch(err => console.log(err));
+  };
+
   render() {
     return (
 
@@ -85,27 +92,25 @@ class Articles extends Component {
               </Card>
               <form>
                 <Input
-                  type="text"
                   name="topic"
                   placeholder="Topic"
                   value={this.state.topic}
                   onChange={this.handleInputChange}
                 />
                 <Input
-                  type="text"
                   name="beginYear"
                   placeholder="Start Year"
                   value={this.state.beginYear}
                   onChange={this.handleInputChange}
                 />
                 <Input
-                  type="text"
                   name="endYear"
                   placeholder="End Year"
                   value={this.state.endYear}
                   onChange={this.handleInputChange}
                 />
-                <SubmitBtn onClick={this.handleFormSubmit} />
+                <SubmitBtn onClick={this.handleFormSubmit}>
+                </SubmitBtn>
               </form>
             </Col>
             <Col>
@@ -113,19 +118,19 @@ class Articles extends Component {
                 <CardTitle>
                   Search Results
             </CardTitle>
-                {this.state.articles.length ? (
-                  <Collection>
-                    {this.state.articles.map(article => (
-                      <CollectionItem key={article.headline.main}>
-                       {article.headline.main}
-                       <SaveBtn onClick={() =>
-                         this.saveArticle(article.headline.main)} />
-                      </CollectionItem>
-                    ))}
-                  </Collection>
-                ) : (
-                    <h2 className="noResults red-text text-lighten-1">No Results to Display</h2>
-                  )}
+
+                <Collection>
+                  {this.state.articles.map(article => (
+                    <CollectionItem key={article.headline.main}>
+                      <div className="urlDiv">
+                        <a className="articleURL" target="_blank" href={article.web_url}>{article.headline.main}</a>
+                      </div>
+                      <SaveBtn onClick={() => this.saveArticle(article.headline.main)} />
+
+                    </CollectionItem>
+                  ))}
+                </Collection>
+
               </Card>
             </Col>
           </Row>

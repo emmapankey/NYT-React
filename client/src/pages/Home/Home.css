@@ -7,3 +7,14 @@
     padding-top: 60px;
     padding-bottom: 90px;
 }
+
+.urlDiv {
+    text-align: left;
+    display: inline-block;
+    width: 800px;
+}
+
+.articleURL {
+    margin-right: 50px;
+    color: black;
+}

@@ -12,21 +12,21 @@ const articleSchema = mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
-    },
-    url: {
-        type: String,
-        unique: true,
-        validate: {
-            validator: function (text) {
-                return text.indexOf("http://query.nytimes.com/") === 0;
-            },
-            message: "Article handle must start with http://query.nytimes.com/"
-        }
     }
+    // url: {
+    //     type: String,
+    //     unique: true,
+    //     validate: {
+    //         validator: function (text) {
+    //             return text.indexOf("http://query.nytimes.com/") === 0;
+    //         },
+    //         message: "Article handle must start with http://query.nytimes.com/"
+    //     }
+    // }
 });
 
 // Create Article model with the articleSchema
-var Articles = mongoose.model("Article", articleSchema);
+var Articles = mongoose.model("Articles", articleSchema);
 
 // Export the Scraped model
 module.exports = Articles;

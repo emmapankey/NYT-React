@@ -1,14 +1,15 @@
-// *****************************************************************************
-// Server.js - This file is the initial starting point for the Node/Express server.
+// // *****************************************************************************
+// // Server.js - This file is the initial starting point for the Node/Express server and database connection.
 
-// *** Dependencies
-// =============================================================
+// // *** Dependencies
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
+const axios = require("axios");
 const PORT = process.env.PORT || 3001;
+
 
 // Configure body parser for AJAX requests
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,6 +21,13 @@ app.use(routes);
 
 // Set up promises with mongoose
 mongoose.Promise = global.Promise;
+// Connect to the Mongo DB
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/nyt-react",
+  {
+    useMongoClient: true
+  }
+);
 
 // Start the API server
 app.listen(PORT, function() {
